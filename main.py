@@ -1,3 +1,4 @@
+import time
 def merge(array):
     if len(array) > 1:
 
@@ -48,6 +49,7 @@ class merge_sort(Sort):
 
 
 def main():
+    inputFile = open("input.txt", "r")
     startTimerM = time.time()
     MainClass = Sort()
 
@@ -56,15 +58,13 @@ def main():
     arrayOfLines = list(filter(lambda element: element != "", inputFile.readlines()))
     arrayOfLines = list(map(lambda element: int(element.replace("\n", "")), arrayOfLines))
     print("Sorting a list with length of " + str(len(arrayOfLines)))
-    merge = MainClass.merge_sort()
-    sortedList = merge.sort(arrayOfLines)
-
+    sortedList = merge(arrayOfLines)
     afterTimerM = time.time()
     timeItTookM = (afterTimerM - startTimerM) * 1000
 
     outputFile = open("output.txt", "w")
     outputString = ""
-    for num in sortedList:
+    for num in arrayOfLines:
             outputString += (str(num) + "\n")
 
     outputFile.write(outputString)
