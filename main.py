@@ -13,12 +13,12 @@ def merge(array):
         IndexInLeftSide = 0
         IndexInRightide = 0
         border = 0
-        while IndexInLeftSide < len(LeftSide) and IndexInRightide < len(RightSide):
-            if LeftSide[IndexInLeftSide] < RightSide[IndexInRightide]:
-                array[border] = LeftSide[IndexInLeftSide]
+        while IndexInLeftSide < len(LeftSide) and IndexInRightide < len(RightSide): #loop until the the two indexed are greater than the array's len
+            if LeftSide[IndexInLeftSide] < RightSide[IndexInRightide]: #if the current left side element at left side index are smaller than the current right side element at right side index
+                array[border] = LeftSide[IndexInLeftSide] #makes the array on the current border's position be the smaller element which is the left one
                 IndexInLeftSide += 1
-            else:
-                array[border] = RightSide[IndexInRightide]
+            else: #if the left side element isn't smaller than the right side element(which means that the right side is bigger)
+                array[border] = RightSide[IndexInRightide] #makes the array on the current border's position be the smaller element which is the left one
                 IndexInRightide += 1
             border += 1
 
@@ -32,6 +32,7 @@ def merge(array):
             array[border] = RightSide[IndexInRightide]
             IndexInRightide += 1
             border += 1
+
 
 
 class Sort:
@@ -49,16 +50,21 @@ class merge_sort(Sort):
 
 
 def main():
-    inputFile = open("input.txt", "r")
     startTimerM = time.time()
+
     MainClass = Sort()
 
-
+    inputFile = open("input.txt", "r")
 
     arrayOfLines = list(filter(lambda element: element != "", inputFile.readlines()))
+
     arrayOfLines = list(map(lambda element: int(element.replace("\n", "")), arrayOfLines))
+
+    arrayOfLines = [38, 27,43, 3, 9, 82, 10]
     print("Sorting a list with length of " + str(len(arrayOfLines)))
-    sortedList = merge(arrayOfLines)
+    merge = MainClass.merge_sort()
+    merge.sort(arrayOfLines)
+
     afterTimerM = time.time()
     timeItTookM = (afterTimerM - startTimerM) * 1000
 
@@ -72,6 +78,9 @@ def main():
     print("Time it took to merge algorithm: " + str(timeItTookM)[:3] + "ms")
 
 
-
 if __name__ == '__main__':
     main()
+
+
+
+
